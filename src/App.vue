@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DirectoryTree from './components/DirectoryTree.vue'
+import DirectoryTree from '@components/DirectoryTree/DirectoryTree.vue'
 
 export default {
   name: 'App',

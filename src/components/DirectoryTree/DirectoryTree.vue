@@ -4,22 +4,22 @@
     <div class="wrapper">
       <h2>{{ `./${fetchDirList.name}` }}</h2>
       <ul>
-          <ListItem
-            v-for="item in fetchDirList.contents"
-            :key="item.name"
-            :list="item"
-          />
+        <ListItem
+          v-for="item in fetchDirList.contents"
+          :key="item.name"
+          :list="item"
+        />
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import ListItem from './ListItem.vue'
-import jsonFile from '../../public/static/node_modules.json'
+import ListItem from '@components/ListItem/ListItem.vue'
+import jsonFile from '@public/static/node_modules.json'
 
 export default {
-  name: 'HelloWorld',
+  name: 'DirectoryTree',
   props: {
     msg: String
   },

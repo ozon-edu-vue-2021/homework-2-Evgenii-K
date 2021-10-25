@@ -1,9 +1,16 @@
 <template>
-  <li :class="isFolder ? 'folder' : ''">
-    <header
-      class="title"
+  <li>
+    <!-- <icon-folder class="icon"/> -->
+    <item-directory
+      :list="list"
+    >
+      <icon-folder class="icon"/>
+    </item-directory>
+    <!-- <header
+      :class="['title', {
+        'folder__title': isFolder
+      }]"
       @click="showTree = !showTree"
-      :class="isFolder ? 'folder__title' : ''"
     >
       {{list.name}}
     </header>
@@ -15,12 +22,14 @@
         :key="subdir.name"
         :list="subdir"
       />
-    </ul>
+    </ul> -->
   </li>
 </template>
 
 <script>
-import ListItem from './ListItem'
+import IconFolder from '@components/Icons/IconFolder.vue'
+// import ListItem from '@components/ListItem/ListItem.vue'
+import ItemDirectory from '../ItemDirectory/ItemDirectory.vue'
 
 export default {
   name: 'ListItem',
@@ -36,13 +45,16 @@ export default {
     }
   },
   components: {
-    ListItem
+    // ListItem,
+    IconFolder,
+    ItemDirectory
   },
-  computed: {
-    isFolder () {
-      return this.list.contents && this.list.contents.length > 0
-    }
-  }
+  // computed: {
+ 
+  //   isFolder () {
+  //     return this.list.contents && this.list.contents.length > 0
+  //   }
+  // }
 }
 </script>
 
@@ -51,12 +63,9 @@ export default {
     display: inline-flex;
   }
 
-  .folder {
+  .folder__title {
     color: #777;
     font-weight: bold;
-  }
-
-  .folder__title {
     cursor: pointer;
   }
 
@@ -74,7 +83,15 @@ export default {
     font-weight: normal;
   }
 
-  li:before {
+  .icon {
+    margin-right: 10px;
+    content: "";
+    height: 16px;
+    vertical-align: middle;
+    width: 16px;
+  }
+
+  /* li:before {
     margin-right: 10px;
     content: "";
     height: 20px;
@@ -91,5 +108,5 @@ export default {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='lightblue' d='M96.429,37.5v39.286c0,3.423-1.228,6.361-3.684,8.817c-2.455,2.455-5.395,3.683-8.816,3.683H16.071 c-3.423,0-6.362-1.228-8.817-3.683c-2.456-2.456-3.683-5.395-3.683-8.817V23.214c0-3.422,1.228-6.362,3.683-8.817 c2.455-2.456,5.394-3.683,8.817-3.683h17.857c3.422,0,6.362,1.228,8.817,3.683c2.455,2.455,3.683,5.395,3.683,8.817V25h37.5 c3.422,0,6.361,1.228,8.816,3.683C95.201,31.138,96.429,34.078,96.429,37.5z' /></svg>");
     background-position: center top;
     background-size: 75% auto;
-  }
+  } */
 </style>
