@@ -1,13 +1,22 @@
 <template>
   <div>
-    <slot></slot>
+    <slot 
+      v-if="isFile"
+      name="file"
+    >
+    </slot>
+    <slot 
+      v-if="!isFile"
+      name="link"
+    >
+    </slot>
     <header
       :class="['title', {
-        'link__title': isLink
+        'selected__title': isSelected
       }]"
-      @click="isSelected"
+      @click="select"
     >
-      {{list.name}}
+      {{properties.name}}
     </header>
   </div>
 </template>
@@ -21,14 +30,17 @@ export default {
       require: true,
     }
   },
+  data: () => ({
+    isSelected: false
+  }),
   computed: {
-    isLink () {
-      return this.properties.type === 'link'
+    isFile () {
+      return this.properties.type === 'file'
     }
   },
   methods: {
-    isSelected() {
-
+    select () {
+      return this.isSelected = !this.isSelected
     }
   }
 }
@@ -37,5 +49,11 @@ export default {
 <style scoped>
   .title {
     display: inline-flex;
+    border: 1px solid transparent;
+    cursor: default;
+  }
+
+  .selected__title {
+    border: 1px solid red;
   }
 </style>
