@@ -1,17 +1,14 @@
 <template>
   <div>
     <slot 
-      v-if="isFile"
-      name="file"
-    >
-    </slot>
-    <slot 
-      v-if="!isFile"
-      name="link"
+      :name="isFile ? 'file' : 'link'"
     >
     </slot>
     <header
-      class="title"
+      tabindex="0"
+      :class="headerClasses"
+      v-click-inside="selectedHandler"
+      v-click-outside="unselectedHandler"
     >
       {{properties.name}}
     </header>
@@ -19,6 +16,9 @@
 </template>
 
 <script>
+import clickInside from '@utils/directives/clickInside.js'
+import clickOutside from '@utils/directives/clickOutside.js'
+
 export default {
   name: 'ItemFile',
   props: {
@@ -27,11 +27,33 @@ export default {
       require: true,
     }
   },
+  data() {
+    return {
+      selected: false
+    }
+  },
   computed: {
     isFile () {
       return this.properties.type === 'file'
+    },    
+    headerClasses() {
+      return ['title', {
+        'selected__title': this.selected
+      }]
     }
-  }
+  },
+  directives: {
+    clickInside,
+    clickOutside
+  },
+  methods: {
+    selectedHandler() {
+      this.selected = true
+    },
+    unselectedHandler() {
+      this.selected = false
+    },
+  },
 }
 </script>
 

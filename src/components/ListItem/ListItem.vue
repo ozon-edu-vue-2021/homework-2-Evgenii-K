@@ -1,5 +1,7 @@
 <template>
-  <li>
+  <li
+    :tabindex="$attrs.tabindex"
+  >
     <item-directory
       v-if="isFolder"
       :list="list"
@@ -35,6 +37,7 @@ export default {
       require: true,
     }
   },
+  inheritAttrs: false,
   components: {
     IconFolder,
     IconFile,

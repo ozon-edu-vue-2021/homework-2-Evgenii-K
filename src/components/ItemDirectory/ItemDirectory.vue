@@ -4,6 +4,7 @@
     <header
       class="folder__title"
       @click="showTree = !showTree"
+      tabindex="0"
     >
       {{list.name}}
     </header>
