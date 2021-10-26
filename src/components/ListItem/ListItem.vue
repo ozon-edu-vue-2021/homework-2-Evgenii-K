@@ -58,7 +58,7 @@ export default {
     font-style: italic;
     font-weight: normal;
   }
-  
+
   .icon {
     margin-right: 10px;
     content: "";

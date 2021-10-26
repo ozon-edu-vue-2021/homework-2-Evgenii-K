@@ -11,10 +11,7 @@
     >
     </slot>
     <header
-      :class="['title', {
-        'selected__title': isSelected
-      }]"
-      @click="select"
+      class="title"
     >
       {{properties.name}}
     </header>
@@ -30,17 +27,9 @@ export default {
       require: true,
     }
   },
-  data: () => ({
-    isSelected: false
-  }),
   computed: {
     isFile () {
       return this.properties.type === 'file'
-    }
-  },
-  methods: {
-    select () {
-      return this.isSelected = !this.isSelected
     }
   }
 }

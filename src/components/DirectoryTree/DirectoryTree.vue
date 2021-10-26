@@ -3,7 +3,10 @@
     <h1>{{ msg }}</h1>
     <div class="wrapper">
       <h2>{{ `./${fetchDirList.name}` }}</h2>
-      <ul>
+      <ul
+        ref="tree"
+        @click="select"
+      >
         <ListItem
           v-for="item in fetchDirList.contents"
           :key="item.name"
@@ -41,6 +44,20 @@ export default {
       })
       .then(jsonData => this.fetchDirList = JSON.parse(jsonData))
       .catch(err => console.log(err))
+    },
+    select(event) {
+      const target = event.target
+      const selected = this.$refs.tree.querySelectorAll('.selected__title')
+
+      if (selected.length) {
+        for(let elem of selected) {
+          elem.classList.remove('selected__title');
+        }
+      }
+      
+      if(target.className !== 'title') return;
+
+      target.classList.add('selected__title');
     }
   }
 }
